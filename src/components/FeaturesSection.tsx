@@ -1,7 +1,7 @@
 
 import React from 'react';
 import FeatureCard from './FeatureCard';
-import { BookOpen, ClipBoard, ChartBar, Award, School, Users } from 'lucide-react';
+import { BookOpen, Clipboard, ChartBar, Award, School, Users } from 'lucide-react';
 
 const FeaturesSection = () => {
   const features = [
@@ -21,7 +21,7 @@ const FeaturesSection = () => {
       description: "Monitor your learning progress with detailed analytics and milestone tracking to stay motivated."
     },
     {
-      icon: ClipBoard,
+      icon: Clipboard,
       title: "Weekly Goal Setter",
       description: "Set achievable weekly goals and get AI-powered recommendations to accelerate your learning journey."
     },
