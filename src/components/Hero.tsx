@@ -2,8 +2,16 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, BookOpen, Users } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
+  const scrollToKCET = () => {
+    const kcetSection = document.getElementById('kcet-predictor');
+    if (kcetSection) {
+      kcetSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="relative bg-gradient-to-br from-blue-50 to-indigo-50 py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -19,18 +27,21 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button 
-              size="lg" 
-              className="bg-[#001f3f] hover:bg-[#002a5c] text-white px-8 py-6 text-lg"
-            >
-              Start Career Quiz
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
+            <Link to="/career-quiz">
+              <Button 
+                size="lg" 
+                className="bg-[#001f3f] hover:bg-[#002a5c] text-white px-8 py-6 text-lg"
+              >
+                Start Career Quiz
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
             
             <Button 
               size="lg" 
               variant="outline" 
               className="border-[#001f3f] text-[#001f3f] hover:bg-[#001f3f] hover:text-white px-8 py-6 text-lg"
+              onClick={scrollToKCET}
             >
               Try KCET Predictor
             </Button>
