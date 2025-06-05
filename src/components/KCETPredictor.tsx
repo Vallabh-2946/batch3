@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Calculator, TrendingUp, MapPin, AlertCircle, Award, Building, ExternalLink, Zap, Droplet } from 'lucide-react';
+import { Calculator, TrendingUp, MapPin, AlertCircle, Award, Building, ExternalLink, Zap, Droplet, BarChart } from 'lucide-react';
 
 interface College {
   'College Name': string;
@@ -27,89 +27,61 @@ const KCETPredictor = () => {
   const [showConfetti, setShowConfetti] = useState(false);
   const [animateResult, setAnimateResult] = useState(false);
 
-  // College data - in a real app, this would be loaded from an API
+  // Expanded college data with more entries
   const collegeData: College[] = [
-    {
-      'College Name': 'Ramaiah Institute of Technology',
-      Location: 'Bangalore',
-      Website: 'https://msrit.edu',
-      Branch: 'CSE',
-      Category: 'GM',
-      'Cutoff Rank': '1626',
-      Year: '2024'
-    },
-    {
-      'College Name': 'Ramaiah Institute of Technology',
-      Location: 'Bangalore',
-      Website: 'https://msrit.edu',
-      Branch: 'CSE',
-      Category: 'SC',
-      'Cutoff Rank': '14053',
-      Year: '2024'
-    },
-    {
-      'College Name': 'Ramaiah Institute of Technology',
-      Location: 'Bangalore',
-      Website: 'https://msrit.edu',
-      Branch: 'CSE',
-      Category: 'ST',
-      'Cutoff Rank': '15288',
-      Year: '2024'
-    },
-    {
-      'College Name': 'Ramaiah Institute of Technology',
-      Location: 'Bangalore',
-      Website: 'https://msrit.edu',
-      Branch: 'CSE',
-      Category: 'OBC',
-      'Cutoff Rank': '5000',
-      Year: '2024'
-    },
-    {
-      'College Name': 'BMS College of Engineering',
-      Location: 'Bangalore',
-      Website: 'https://bmsce.ac.in',
-      Branch: 'CSE',
-      Category: 'GM',
-      'Cutoff Rank': '2500',
-      Year: '2024'
-    },
-    {
-      'College Name': 'BMS College of Engineering',
-      Location: 'Bangalore',
-      Website: 'https://bmsce.ac.in',
-      Branch: 'CSE',
-      Category: 'SC',
-      'Cutoff Rank': '4131',
-      Year: '2024'
-    },
-    {
-      'College Name': 'BMS Institute of Technology',
-      Location: 'Bangalore',
-      Website: 'https://bmsit.ac.in',
-      Branch: 'CSE',
-      Category: 'GM',
-      'Cutoff Rank': '8730',
-      Year: '2024'
-    },
-    {
-      'College Name': 'PES College of Engineering',
-      Location: 'Bangalore',
-      Website: 'https://pes.edu',
-      Branch: 'CSE',
-      Category: 'GM',
-      'Cutoff Rank': '31799',
-      Year: '2024'
-    },
-    {
-      'College Name': 'Siddaganga Institute of Technology',
-      Location: 'Bangalore',
-      Website: 'https://sit.ac.in',
-      Branch: 'CSE',
-      Category: 'GM',
-      'Cutoff Rank': '10057',
-      Year: '2024'
-    }
+    // Ramaiah Institute of Technology
+    { 'College Name': 'Ramaiah Institute of Technology', Location: 'Bangalore', Website: 'https://msrit.edu', Branch: 'CSE', Category: 'GM', 'Cutoff Rank': '1626', Year: '2024' },
+    { 'College Name': 'Ramaiah Institute of Technology', Location: 'Bangalore', Website: 'https://msrit.edu', Branch: 'CSE', Category: 'SC', 'Cutoff Rank': '14053', Year: '2024' },
+    { 'College Name': 'Ramaiah Institute of Technology', Location: 'Bangalore', Website: 'https://msrit.edu', Branch: 'CSE', Category: 'ST', 'Cutoff Rank': '15288', Year: '2024' },
+    { 'College Name': 'Ramaiah Institute of Technology', Location: 'Bangalore', Website: 'https://msrit.edu', Branch: 'CSE', Category: 'OBC', 'Cutoff Rank': '5000', Year: '2024' },
+    { 'College Name': 'Ramaiah Institute of Technology', Location: 'Bangalore', Website: 'https://msrit.edu', Branch: 'ECE', Category: 'GM', 'Cutoff Rank': '4564', Year: '2024' },
+    { 'College Name': 'Ramaiah Institute of Technology', Location: 'Bangalore', Website: 'https://msrit.edu', Branch: 'ECE', Category: 'SC', 'Cutoff Rank': '28765', Year: '2024' },
+    { 'College Name': 'Ramaiah Institute of Technology', Location: 'Bangalore', Website: 'https://msrit.edu', Branch: 'ECE', Category: 'ST', 'Cutoff Rank': '30219', Year: '2024' },
+    { 'College Name': 'Ramaiah Institute of Technology', Location: 'Bangalore', Website: 'https://msrit.edu', Branch: 'ECE', Category: 'OBC', 'Cutoff Rank': '6000', Year: '2024' },
+    { 'College Name': 'Ramaiah Institute of Technology', Location: 'Bangalore', Website: 'https://msrit.edu', Branch: 'ME', Category: 'GM', 'Cutoff Rank': '24096', Year: '2024' },
+    { 'College Name': 'Ramaiah Institute of Technology', Location: 'Bangalore', Website: 'https://msrit.edu', Branch: 'ME', Category: 'SC', 'Cutoff Rank': '102510', Year: '2024' },
+    { 'College Name': 'Ramaiah Institute of Technology', Location: 'Bangalore', Website: 'https://msrit.edu', Branch: 'ME', Category: 'ST', 'Cutoff Rank': '95454', Year: '2024' },
+    { 'College Name': 'Ramaiah Institute of Technology', Location: 'Bangalore', Website: 'https://msrit.edu', Branch: 'ME', Category: 'OBC', 'Cutoff Rank': '26000', Year: '2024' },
+    { 'College Name': 'Ramaiah Institute of Technology', Location: 'Bangalore', Website: 'https://msrit.edu', Branch: 'CE', Category: 'GM', 'Cutoff Rank': '33103', Year: '2024' },
+    { 'College Name': 'Ramaiah Institute of Technology', Location: 'Bangalore', Website: 'https://msrit.edu', Branch: 'CE', Category: 'SC', 'Cutoff Rank': '47261', Year: '2024' },
+    { 'College Name': 'Ramaiah Institute of Technology', Location: 'Bangalore', Website: 'https://msrit.edu', Branch: 'CE', Category: 'ST', 'Cutoff Rank': '64928', Year: '2024' },
+    { 'College Name': 'Ramaiah Institute of Technology', Location: 'Bangalore', Website: 'https://msrit.edu', Branch: 'CE', Category: 'OBC', 'Cutoff Rank': '34000', Year: '2024' },
+    
+    // BMS College of Engineering
+    { 'College Name': 'BMS College of Engineering', Location: 'Bangalore', Website: 'https://bmsce.ac.in', Branch: 'CSE', Category: 'GM', 'Cutoff Rank': '2500', Year: '2024' },
+    { 'College Name': 'BMS College of Engineering', Location: 'Bangalore', Website: 'https://bmsce.ac.in', Branch: 'CSE', Category: 'SC', 'Cutoff Rank': '4131', Year: '2024' },
+    { 'College Name': 'BMS College of Engineering', Location: 'Bangalore', Website: 'https://bmsce.ac.in', Branch: 'CSE', Category: 'ST', 'Cutoff Rank': '5499', Year: '2024' },
+    { 'College Name': 'BMS College of Engineering', Location: 'Bangalore', Website: 'https://bmsce.ac.in', Branch: 'ECE', Category: 'GM', 'Cutoff Rank': '6500', Year: '2024' },
+    { 'College Name': 'BMS College of Engineering', Location: 'Bangalore', Website: 'https://bmsce.ac.in', Branch: 'ECE', Category: 'SC', 'Cutoff Rank': '30853', Year: '2024' },
+    { 'College Name': 'BMS College of Engineering', Location: 'Bangalore', Website: 'https://bmsce.ac.in', Branch: 'ECE', Category: 'ST', 'Cutoff Rank': '28258', Year: '2024' },
+    { 'College Name': 'BMS College of Engineering', Location: 'Bangalore', Website: 'https://bmsce.ac.in', Branch: 'ME', Category: 'GM', 'Cutoff Rank': '12000', Year: '2024' },
+    { 'College Name': 'BMS College of Engineering', Location: 'Bangalore', Website: 'https://bmsce.ac.in', Branch: 'ME', Category: 'SC', 'Cutoff Rank': '15458', Year: '2024' },
+    { 'College Name': 'BMS College of Engineering', Location: 'Bangalore', Website: 'https://bmsce.ac.in', Branch: 'ME', Category: 'ST', 'Cutoff Rank': '17980', Year: '2024' },
+    { 'College Name': 'BMS College of Engineering', Location: 'Bangalore', Website: 'https://bmsce.ac.in', Branch: 'CE', Category: 'GM', 'Cutoff Rank': '18000', Year: '2024' },
+    { 'College Name': 'BMS College of Engineering', Location: 'Bangalore', Website: 'https://bmsce.ac.in', Branch: 'CE', Category: 'SC', 'Cutoff Rank': '32553', Year: '2024' },
+    { 'College Name': 'BMS College of Engineering', Location: 'Bangalore', Website: 'https://bmsce.ac.in', Branch: 'CE', Category: 'ST', 'Cutoff Rank': '38993', Year: '2024' },
+    
+    // BMS Institute of Technology
+    { 'College Name': 'BMS Institute of Technology', Location: 'Bangalore', Website: 'https://bmsit.ac.in', Branch: 'CSE', Category: 'GM', 'Cutoff Rank': '8730', Year: '2024' },
+    { 'College Name': 'BMS Institute of Technology', Location: 'Bangalore', Website: 'https://bmsit.ac.in', Branch: 'CSE', Category: 'OBC', 'Cutoff Rank': '9500', Year: '2024' },
+    { 'College Name': 'BMS Institute of Technology', Location: 'Bangalore', Website: 'https://bmsit.ac.in', Branch: 'ECE', Category: 'GM', 'Cutoff Rank': '11698', Year: '2024' },
+    { 'College Name': 'BMS Institute of Technology', Location: 'Bangalore', Website: 'https://bmsit.ac.in', Branch: 'ECE', Category: 'OBC', 'Cutoff Rank': '12500', Year: '2024' },
+    { 'College Name': 'BMS Institute of Technology', Location: 'Bangalore', Website: 'https://bmsit.ac.in', Branch: 'ME', Category: 'GM', 'Cutoff Rank': '37817', Year: '2024' },
+    { 'College Name': 'BMS Institute of Technology', Location: 'Bangalore', Website: 'https://bmsit.ac.in', Branch: 'ME', Category: 'OBC', 'Cutoff Rank': '39000', Year: '2024' },
+    { 'College Name': 'BMS Institute of Technology', Location: 'Bangalore', Website: 'https://bmsit.ac.in', Branch: 'CE', Category: 'GM', 'Cutoff Rank': '75173', Year: '2024' },
+    { 'College Name': 'BMS Institute of Technology', Location: 'Bangalore', Website: 'https://bmsit.ac.in', Branch: 'CE', Category: 'OBC', 'Cutoff Rank': '76000', Year: '2024' },
+    
+    // PES College of Engineering
+    { 'College Name': 'PES College of Engineering', Location: 'Bangalore', Website: 'https://pes.edu', Branch: 'CSE', Category: 'GM', 'Cutoff Rank': '31799', Year: '2024' },
+    { 'College Name': 'PES College of Engineering', Location: 'Bangalore', Website: 'https://pes.edu', Branch: 'CSE', Category: 'OBC', 'Cutoff Rank': '33000', Year: '2024' },
+    { 'College Name': 'PES College of Engineering', Location: 'Bangalore', Website: 'https://pes.edu', Branch: 'ECE', Category: 'GM', 'Cutoff Rank': '42707', Year: '2024' },
+    { 'College Name': 'PES College of Engineering', Location: 'Bangalore', Website: 'https://pes.edu', Branch: 'ECE', Category: 'OBC', 'Cutoff Rank': '44000', Year: '2024' },
+    
+    // Siddaganga Institute of Technology
+    { 'College Name': 'Siddaganga Institute of Technology', Location: 'Bangalore', Website: 'https://sit.ac.in', Branch: 'CSE', Category: 'GM', 'Cutoff Rank': '10057', Year: '2024' },
+    { 'College Name': 'Siddaganga Institute of Technology', Location: 'Bangalore', Website: 'https://sit.ac.in', Branch: 'CSE', Category: 'OBC', 'Cutoff Rank': '11000', Year: '2024' },
+    { 'College Name': 'Siddaganga Institute of Technology', Location: 'Bangalore', Website: 'https://sit.ac.in', Branch: 'CSE', Category: 'SC', 'Cutoff Rank': '34124', Year: '2024' },
+    { 'College Name': 'Siddaganga Institute of Technology', Location: 'Bangalore', Website: 'https://sit.ac.in', Branch: 'CSE', Category: 'ST', 'Cutoff Rank': '25301', Year: '2024' },
   ];
 
   const totalStudents = 311991;
@@ -125,7 +97,10 @@ const KCETPredictor = () => {
     const mathNum = parseFloat(math);
     const kcetNum = parseFloat(kcetScore);
     
-    if (!physicsNum || !chemistryNum || !mathNum || !kcetNum) return 0;
+    // Return default values if inputs are invalid
+    if (!physicsNum || !chemistryNum || !mathNum || !kcetNum) {
+      return { predictedRank: 0, percentile: 0 };
+    }
     
     // Calculate PCM average
     const pcmAvg = (physicsNum + chemistryNum + mathNum) / 3;
@@ -183,8 +158,8 @@ const KCETPredictor = () => {
     console.log('Predicting KCET rank for:', { physics, chemistry, math, kcetScore, branch, category });
   };
 
-  const { predictedRank, percentile } = calculateRank();
-  const eligibleColleges = getEligibleColleges(predictedRank);
+  const result = calculateRank();
+  const eligibleColleges = getEligibleColleges(result.predictedRank);
 
   return (
     <section id="kcet-predictor" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-indigo-50 relative">
@@ -194,7 +169,7 @@ const KCETPredictor = () => {
           {[...Array(40)].map((_, i) => (
             <div
               key={i}
-              className="absolute w-3 h-3 animate-bounce"
+              className="absolute w-3 h-3 animate-bounce confetti-piece"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
@@ -219,7 +194,7 @@ const KCETPredictor = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Input Form */}
-          <Card className="shadow-xl border-0 rounded-3xl overflow-hidden">
+          <Card className="shadow-xl border-0 rounded-3xl overflow-hidden floating-card">
             <CardHeader className="bg-gradient-to-r from-[#001f3f] to-blue-600 text-white">
               <CardTitle className="flex items-center text-xl">
                 <Calculator className="mr-3 h-6 w-6" />
@@ -242,7 +217,7 @@ const KCETPredictor = () => {
                     placeholder="e.g., 85"
                     value={physics}
                     onChange={(e) => setPhysics(e.target.value)}
-                    className="transition-all duration-300 focus:scale-105"
+                    className="transition-all duration-300 focus:scale-105 animated-input"
                     min="0"
                     max="100"
                   />
@@ -259,7 +234,7 @@ const KCETPredictor = () => {
                     placeholder="e.g., 82"
                     value={chemistry}
                     onChange={(e) => setChemistry(e.target.value)}
-                    className="transition-all duration-300 focus:scale-105"
+                    className="transition-all duration-300 focus:scale-105 animated-input"
                     min="0"
                     max="100"
                   />
@@ -276,7 +251,7 @@ const KCETPredictor = () => {
                     placeholder="e.g., 90"
                     value={math}
                     onChange={(e) => setMath(e.target.value)}
-                    className="transition-all duration-300 focus:scale-105"
+                    className="transition-all duration-300 focus:scale-105 animated-input"
                     min="0"
                     max="100"
                   />
@@ -293,7 +268,7 @@ const KCETPredictor = () => {
                     placeholder="e.g., 145"
                     value={kcetScore}
                     onChange={(e) => setKcetScore(e.target.value)}
-                    className="transition-all duration-300 focus:scale-105"
+                    className="transition-all duration-300 focus:scale-105 animated-input"
                     min="0"
                     max="180"
                   />
@@ -309,7 +284,7 @@ const KCETPredictor = () => {
                     id="branch"
                     value={branch}
                     onChange={(e) => setBranch(e.target.value)}
-                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
+                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 animated-select"
                   >
                     <option value="">Select Branch</option>
                     <option value="CSE">Computer Science Engineering</option>
@@ -328,7 +303,7 @@ const KCETPredictor = () => {
                     id="category"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
+                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 animated-select"
                   >
                     <option value="">Select Category</option>
                     <option value="GM">General Merit</option>
@@ -351,7 +326,7 @@ const KCETPredictor = () => {
 
               <Button 
                 onClick={handlePredict}
-                className="w-full bg-gradient-to-r from-[#001f3f] to-blue-600 hover:from-blue-600 hover:to-[#001f3f] text-white py-6 text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+                className="w-full bg-gradient-to-r from-[#001f3f] to-blue-600 hover:from-blue-600 hover:to-[#001f3f] text-white py-6 text-lg transition-all duration-300 transform hover:scale-105 shadow-lg animated-button"
                 disabled={!physics || !chemistry || !math || !kcetScore || !branch || !category}
               >
                 Predict My Rank & Colleges
@@ -361,10 +336,10 @@ const KCETPredictor = () => {
           </Card>
 
           {/* Results */}
-          <Card className="shadow-xl border-0 rounded-3xl overflow-hidden">
+          <Card className="shadow-xl border-0 rounded-3xl overflow-hidden floating-card">
             <CardHeader className="bg-gradient-to-r from-green-500 to-blue-500 text-white">
               <CardTitle className="flex items-center text-xl">
-                <MapPin className="mr-3 h-6 w-6" />
+                <BarChart className="mr-3 h-6 w-6" />
                 Prediction Results
               </CardTitle>
               <CardDescription className="text-green-100">
@@ -374,19 +349,19 @@ const KCETPredictor = () => {
             <CardContent className="p-6">
               {predicted ? (
                 <div className={`space-y-6 ${animateResult ? 'animate-fade-in' : ''}`}>
-                  <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-200">
+                  <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-200 result-card">
                     <h3 className="font-semibold text-[#001f3f] mb-3 text-lg">Predicted KCET Rank</h3>
                     <p className="text-4xl font-bold text-blue-600 mb-2 animate-scale-in">
-                      {predictedRank.toLocaleString()}
+                      {result.predictedRank.toLocaleString()}
                     </p>
                     <p className="text-sm text-gray-600 mb-2">out of {totalStudents.toLocaleString()} students</p>
                     <div className="flex items-center space-x-2">
                       <span className={`px-3 py-1 rounded-full text-white text-sm font-semibold ${
-                        percentile >= 90 ? 'bg-green-500' : 
-                        percentile >= 75 ? 'bg-blue-500' : 
-                        percentile >= 50 ? 'bg-yellow-500' : 'bg-red-500'
-                      } animate-bounce`}>
-                        Percentile: {percentile.toFixed(2)}%
+                        result.percentile >= 90 ? 'bg-green-500' : 
+                        result.percentile >= 75 ? 'bg-blue-500' : 
+                        result.percentile >= 50 ? 'bg-yellow-500' : 'bg-red-500'
+                      } animate-bounce-in`}>
+                        Percentile: {result.percentile.toFixed(2)}%
                       </span>
                     </div>
                   </div>
@@ -399,12 +374,12 @@ const KCETPredictor = () => {
                       {eligibleColleges.length > 0 ? (
                         eligibleColleges.map((college, index) => {
                           const cutoffRank = parseInt(college['Cutoff Rank']);
-                          const confidence = getConfidenceLevel(cutoffRank, predictedRank);
+                          const confidence = getConfidenceLevel(cutoffRank, result.predictedRank);
                           
                           return (
                             <div 
                               key={index} 
-                              className="border border-gray-200 rounded-xl p-4 hover:shadow-lg transition-all duration-300 transform hover:scale-105 animate-slide-in-right"
+                              className="border border-gray-200 rounded-xl p-4 hover:shadow-lg transition-all duration-300 transform hover:scale-105 animate-slide-in-right college-card-animated"
                               style={{ animationDelay: `${index * 100}ms` }}
                             >
                               <div className="flex justify-between items-start mb-2">
@@ -422,7 +397,7 @@ const KCETPredictor = () => {
                               
                               <div className="grid grid-cols-2 gap-2 text-sm mb-3">
                                 <div>Cutoff Rank: <span className="font-bold">{cutoffRank.toLocaleString()}</span></div>
-                                <div>Rank Difference: <span className="font-bold">{(cutoffRank - predictedRank).toLocaleString()}</span></div>
+                                <div>Rank Difference: <span className="font-bold">{(cutoffRank - result.predictedRank).toLocaleString()}</span></div>
                               </div>
                               
                               <a 
