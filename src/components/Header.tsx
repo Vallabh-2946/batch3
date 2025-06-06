@@ -22,12 +22,14 @@ const Header = () => {
           </nav>
 
           <div className="flex items-center space-x-4">
-            <Button variant="outline" className="hidden sm:inline-flex">
-              Log In
-            </Button>
-            <Link to="/career-quiz">
+            <Link to="/login">
+              <Button variant="outline" className="hidden sm:inline-flex">
+                Log In
+              </Button>
+            </Link>
+            <Link to="/signup">
               <Button className="bg-[#001f3f] hover:bg-[#002a5c] text-white">
-                Get Started
+                Sign Up
               </Button>
             </Link>
             <Menu className="h-6 w-6 md:hidden text-gray-700" />

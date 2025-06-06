@@ -10,6 +10,8 @@ import Roadmap from "./pages/Roadmap";
 import Progress from "./pages/Progress";
 import Goals from "./pages/Goals";
 import CollegeGuide from "./pages/CollegeGuide";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +29,8 @@ const App = () => (
           <Route path="/progress" element={<Progress />} />
           <Route path="/goals" element={<Goals />} />
           <Route path="/college-guide" element={<CollegeGuide />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
