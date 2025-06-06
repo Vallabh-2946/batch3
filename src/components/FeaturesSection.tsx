@@ -2,8 +2,37 @@
 import React from 'react';
 import FeatureCard from './FeatureCard';
 import { BookOpen, Clipboard, ChartBar, Award, School, Users } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const FeaturesSection = () => {
+  const navigate = useNavigate();
+
+  const handleFeatureClick = (featureTitle: string) => {
+    switch (featureTitle) {
+      case "AI Career Quiz":
+        navigate('/career-quiz');
+        break;
+      case "Learning Roadmaps":
+        navigate('/roadmap');
+        break;
+      case "Skill Progress Tracker":
+        navigate('/progress');
+        break;
+      case "Weekly Goal Setter":
+        navigate('/goals');
+        break;
+      case "KCET Rank Predictor":
+        // Scroll to KCET section on same page
+        document.getElementById('kcet-predictor')?.scrollIntoView({ behavior: 'smooth' });
+        break;
+      case "College Admission Guide":
+        navigate('/college-guide');
+        break;
+      default:
+        break;
+    }
+  };
+
   const features = [
     {
       icon: Users,
@@ -58,6 +87,7 @@ const FeaturesSection = () => {
               title={feature.title}
               description={feature.description}
               highlight={feature.highlight}
+              onClick={() => handleFeatureClick(feature.title)}
             />
           ))}
         </div>

@@ -2,19 +2,24 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { LucideIcon } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface FeatureCardProps {
   icon: LucideIcon;
   title: string;
   description: string;
   highlight?: boolean;
+  onClick?: () => void;
 }
 
-const FeatureCard = ({ icon: Icon, title, description, highlight }: FeatureCardProps) => {
+const FeatureCard = ({ icon: Icon, title, description, highlight, onClick }: FeatureCardProps) => {
   return (
-    <Card className={`relative transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${
-      highlight ? 'border-2 border-blue-500 bg-blue-50' : 'hover:border-gray-300'
-    }`}>
+    <Card 
+      className={`relative transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer ${
+        highlight ? 'border-2 border-blue-500 bg-blue-50' : 'hover:border-gray-300'
+      }`}
+      onClick={onClick}
+    >
       {highlight && (
         <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
           <span className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-medium">
